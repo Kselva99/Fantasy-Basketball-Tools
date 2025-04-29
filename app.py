@@ -1,7 +1,7 @@
 import streamlit as st
-import pandas as pd
-import plotly.graph_objects as go
-import numpy as np
+# import pandas as pd
+# import plotly.graph_objects as go
+# import numpy as np
 
 # Page Setup
 st.set_page_config(
@@ -24,20 +24,17 @@ linkedin_html = f"""
 st.sidebar.markdown(linkedin_html, unsafe_allow_html=True)
 
 # Sidebar Navigation
-# page = st.sidebar.selectbox("Tools", ["Player Comparison", "Drafting Strategy"], index=0)
-page = "Player Comparison"
+page = st.sidebar.selectbox("Tools", ["Player Comparison", "Trade Tool", "Ranking Viewer"], index=0)
 
 # Player Comparison Tool
 if page == "Player Comparison":
     st.title("NBA 9CAT Fantasy Player Comparison")
     
     # Sidebar Inputs
+    st.sidebar.markdown("""---""")
     st.sidebar.subheader("Comparison Inputs")
     player1_comp = st.sidebar.selectbox("Player 1", ["Test Player 1", "Test Player 2"])
     player2_comp = st.sidebar.selectbox("Player 2", ["Test Player 3", "Test Player 4"])
-
-    st.sidebar.markdown("""---""")
-    st.sidebar.subheader("Trade Tool Inputs")
 
     st.sidebar.markdown("""---""")
     st.sidebar.subheader("Ranking Inputs")
@@ -86,20 +83,23 @@ if page == "Player Comparison":
         for c, v in zip(row, vals):
             with c:
                 render_cell(v)
-    
-    
-    # Trade Tool Code
-
-
-    # Ranking Inputs
 
 
 
-# Drafting Tool
-elif page == "Drafting Strategy":
-    st.title("Drafting Strategy - H Algorithm")
+# Trade Tool
+elif page == "Trade Tool":
+    st.title("NBA 9CAT Fantasy Trade Analyzer")
 
     # Sidebar Inputs
     st.sidebar.markdown("""---""")
-    st.sidebar.subheader("Drafting Inputs")
+    st.sidebar.subheader("Trade Tool Inputs")
+
+
+# Trade Tool
+elif page == "Ranking Viewer":
+    st.title("NBA 9CAT Fantasy Player Rankings")
+
+    # Sidebar Inputs
+    st.sidebar.markdown("""---""")
+    st.sidebar.subheader("Ranking Inputs")
 
