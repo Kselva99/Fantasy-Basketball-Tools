@@ -55,8 +55,8 @@ if page == "Player Comparison":
 
     st.sidebar.markdown("""---""")
     st.sidebar.subheader("League Settings")
-    num_teams = st.sidebar.number_input("Number of Teams", min_value=1, max_value=20, value=12)
-    players_per_team = st.sidebar.number_input("Players per Team", min_value=1, max_value=20, value=13)
+    num_teams = st.sidebar.number_input("Number of Teams", min_value=1, max_value=20, value=12, help="Here you want to enter the number of teams there are in your fantasy league. This will matter with the G Score calculations, since we use the Z score to select the top rostered players for evaluation.")
+    players_per_team = st.sidebar.number_input("Players per Team", min_value=1, max_value=20, value=13, help="Here you want to enter the number of players each team can roster in your league. This will matter with the G Score calculations, since we use the Z score to select the top rostered players for evaluation.")
     
     df_top_q = df.sort_values(by="z_avg_across_9_cats", ascending=False).head(num_teams * players_per_team)
     kappa = (2 * players_per_team) / (2 * (players_per_team) - 1)
