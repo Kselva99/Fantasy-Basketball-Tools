@@ -15,10 +15,12 @@ st.set_page_config(
 st.sidebar.title("Fantasy Basketball 9CAT Analyzer")
 
 linkedin_url = "https://www.linkedin.com/in/karthik-selvaraj-purdue/"
+linkedin_icon_url = "https://cdn-icons-png.flaticon.com/512/174/174857.png"
 linkedin_html = f"""
 <div style="display: flex; align-items: center;  margin-bottom: 20px;">
     <span style='font-size:14px; margin-right: 5px;'>Developed by </span>
     <a href="{linkedin_url}" target="_blank" style="display: flex; align-items: center; text-decoration: none;">
+         <img src="{linkedin_icon_url}" width="14" height="14" style="margin-right: 5px;" />
         <span style='font-size:14px;'>Karthik Selvaraj</span>
     </a>
 </div>
