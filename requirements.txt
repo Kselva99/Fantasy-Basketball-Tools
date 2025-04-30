@@ -1,0 +1,6 @@
+streamlit
+pandas
+numpy
+json
+os
+base64
