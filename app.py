@@ -254,6 +254,7 @@ if page == "Player Comparison":
             f"{border_style}margin-top:{margin_top};padding:8px;"
             "display:flex;align-items:center;justify-content:center;"
             f"font-size:{font_size};"
+            "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
         )
         if bold or is_header:
             base_style += "font-weight:bold;"
