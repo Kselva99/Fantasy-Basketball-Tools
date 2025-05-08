@@ -65,6 +65,49 @@ if page == "Player Comparison":
     
     # punt_cats = st.sidebar.multiselect("Punted Categories (Max 4)", options=all_punt_options, max_selections=4)
 
+    expander = st.expander("Background Information")
+    expander.markdown('''
+        This tool compares NBA player performance in the 2024-25 season for 9CAT (or 9 category) fantasy basketball leagues.
+        These catgeories include field goal percentage (FG%), free throw percentage (FT%), 3-pointers made (3PTM), points (PTS), 
+        rebounds (REB), assists (AST), steals (STL), blocks (BLK), and turnovers (TOV).
+        In category-based leagues, it can be difficult to directly compare players that specialize in different stats. For example,
+        who is more valuable: Trae Young (league assist leader) or Walker Kessler (top 3 shot blocker)? Many use the Z Score for
+        comparing players in category fantasy basketball. The following is the question for calculating a player's Z score for a
+        certain category:
+    ''')
+
+    expander.latex(r"Z(p, c) = \frac{\mu_{c}(p) - \mu_{c}}{\sigma_{c}}")
+
+    expander.markdown(r'''
+        Where $Z(p, c)$ is the Z Score for player $p$ in category $c$, $\mu_{c}(p)$ is player $p$'s average in category $c$, $\mu_{c}$ is 
+        the league-wide average for category $c$, and $\sigma_{c}$ is the league-wide standard deviation for category $c$. There are some
+        changes to this formula for percentages and turnovers, but this is the general metric used to evaluate a player's performance in each category
+        To get a player's overall value, you would average the Z Scores across all categories.\n
+        
+        The biggest issue with the Z Score is that it does not account for the fact that players do not always perfroms to their averages. Sometimes, 
+        players have off nights or even off weeks where they perform below average. On the other hand, sometimes players are really hot and perform
+        much better than they usually do. We can quantify this as a player's week-to-week variance. How does a player's performance vary week-by-week?
+        The G Score attempts to modify the Z Score by accounting for this variance in player performance week-to-week. Bwlo is the equation for
+        calculating a player's G Score for a certain category:
+    ''')
+
+    expander.latex(r"G(p, c) = \frac{\mu_{c}(p) - \mu_{c}}{\sqrt{\sigma^{2}_{c} + \kappa\tau^{2}_{c}}}")
+
+    expander.markdown(r'''
+    Where $G(p, c)$ is the G Score for player $p$ in category $c$, $\kappa$ is a scaling factor such that $\kappa = \frac{2N}{2N - 1}$ where $N$ is the number 
+    of players used in the calculation, $\tau^{2}_{c}$ is the league-wide week-by-week variance in player performance for category $c$, and all other variables are the
+    same as the Z Score calculation. Similar to the Z Score, we average a player's performance in each category to obtain their G Score value which accounts for
+    real-world variability in performance. The $\kappa$ scaling factor is used because we do not use the player we are calculating the G Score for in the calculation for
+    $\tau_{c}$. We also use only the top $N$ players for our calculation to only evaluate the value of players relative to all rostered or potentially rosterable players.
+    This is why we allow users to input their league information, so we can more accurately asses player value for your fantasy league.\n
+                      
+    We also allow players to input the categories they are punting (or deliberately ignoring), so you can asses player value based on your team contruction. There
+    can only be a maximum of 4 of these categories chosen, as punting more than 4 would lead to a loss every week in 9CAT leagues.\n
+    
+    The tables below show each player's average for all categories along with their G Scores for them. The player with the better G Score in a category will have their
+    stat highlighted. At the bottom, we average these G Scores for you and determine the more valuable player based on your inputs. 
+    ''')
+
     # Select player rows
     p1 = df[df['ascii_name'] == player1_comp].iloc[0]
     p2 = df[df['ascii_name'] == player2_comp].iloc[0]
